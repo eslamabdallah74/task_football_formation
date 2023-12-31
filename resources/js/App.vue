@@ -1,6 +1,6 @@
 <template>
     <div>
-        we are here to declare war
+        <router-view></router-view>
     </div>
 </template>
 <script>

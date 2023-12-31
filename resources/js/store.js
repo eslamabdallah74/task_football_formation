@@ -1,8 +1,10 @@
-import { createApp } from 'vue';
-import ExampleComponent from './components/ExampleComponent.vue';
+import { createPinia } from 'pinia';
 
-const app = createApp({});
+export const pinia = createPinia();
 
-app.component('example-component', ExampleComponent);
-
-app.mount('#app');
+// Example store
+export const useMyStore = pinia.defineStore('myStore', {
+  state: () => ({
+    message: 'Hello from Pinia!',
+  }),
+});
