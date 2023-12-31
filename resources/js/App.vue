@@ -1,12 +1,15 @@
 <template>
     <div>
+        <Navbar />
         <router-view></router-view>
     </div>
 </template>
 <script>
-export default {
-    setup() {
+import Navbar from './components/Navbar.vue';
 
-    }
-}
+export default {
+    components: {
+        Navbar,
+    },
+};
 </script>
