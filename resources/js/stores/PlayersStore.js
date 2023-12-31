@@ -4,8 +4,6 @@ export const useProductStore = defineStore("ProductStore", {
         return {
             players: [],
         }
-
-
     },
     actions: {
         async addPlayer(playerData) {

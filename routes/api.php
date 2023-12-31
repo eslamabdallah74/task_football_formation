@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LineUpController;
 use App\Http\Controllers\Api\PlayerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('/players', PlayerController::class);
+Route::apiResource('/lineups', LineUpController::class);

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div v-if="loading" class="loader">Loading...</div>
         <table v-if="players.length > 0" class="table">
             <thead>
@@ -8,7 +8,7 @@
                     <th>Name</th>
                     <th>Position</th>
                     <th>Number</th>
-                    <th>Actions</th>
+                    <th v-if="!home">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,15 +42,18 @@
                             {{ player.number }}
                         </template>
                     </td>
-                    <td>
-                        <template v-if="editingPlayerId === player.id">
-                            <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
-                        </template>
-                        <template v-else>
-                            <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
-                        </template>
-                        <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
-                    </td>
+                    <template v-if="!home">
+                        <td>
+                            <template v-if="editingPlayerId === player.id">
+                                <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
+                            </template>
+                            <template v-else>
+                                <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
+                            </template>
+                            <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </template>
+
                 </tr>
             </tbody>
         </table>
@@ -66,6 +69,12 @@ import { useProductStore } from '../stores/PlayersStore';
 const store = useProductStore();
 
 export default {
+    props: {
+        home: {
+            type: Boolean,
+            default: false,
+        },
+    },
     data() {
         return {
             players: [],
@@ -133,11 +142,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
 .loader {
     text-align: center;
     padding: 20px;
