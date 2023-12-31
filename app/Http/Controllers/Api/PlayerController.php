@@ -23,4 +23,24 @@ class PlayerController extends Controller
 
         return response()->json(['message' => 'Player created successfully']);
     }
+
+    public function show(Player $player)
+    {
+        return response()->json(['player' => $player]);
+    }
+
+    public function update(AddPlayerRequest $request, Player $player)
+    {
+        $validatedData = $request->validated();
+        $player->update($validatedData);
+
+        return response()->json(['message' => 'Player updated successfully']);
+    }
+
+    public function destroy(Player $player)
+    {
+        $player->delete();
+
+        return response()->json(['message' => 'Player deleted successfully']);
+    }
 }
