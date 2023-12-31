@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AddPlayerRequest extends FormRequest
 {
@@ -24,7 +25,12 @@ class AddPlayerRequest extends FormRequest
         return [
             'name' => 'required|string|min:2|max:44',
             'position' => 'required|in:forward,midfielder,defender',
-            'number' => 'required|integer|unique:players,number|between:2,99',
+            'number' => [
+                'required',
+                'integer',
+                Rule::unique('players', 'number')->ignore($this->route('player')),
+                'between:2,99',
+            ],
         ];
     }
     /**

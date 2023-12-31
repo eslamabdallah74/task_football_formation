@@ -28,9 +28,9 @@ export const useProductStore = defineStore("ProductStore", {
                 console.error('Error adding player:', error);
             }
         },
-        async editPlayer(playerData) {
+        async updatePlayer(playerId, playerData) {
             try {
-                const response = await fetch(`/api/players/${playerData.id}`, {
+                const response = await fetch(`/api/players/${playerId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,11 +43,11 @@ export const useProductStore = defineStore("ProductStore", {
                     const errorData = await response.json();
                     return Promise.reject(errorData);
                 }
-
             } catch (error) {
                 console.error('Error editing player:', error);
             }
         },
+
 
         async deletePlayer(playerId) {
             try {

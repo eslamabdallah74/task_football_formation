@@ -14,11 +14,41 @@
             <tbody>
                 <tr v-for="(player, key) in players" :key="player.id">
                     <td>{{ key + 1 }}</td>
-                    <td>{{ player.name }}</td>
-                    <td>{{ player.position }}</td>
-                    <td>{{ player.number }}</td>
                     <td>
-                        <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
+                        <template v-if="editingPlayerId === player.id">
+                            <input v-model="editedPlayer.name" type="text" required />
+                        </template>
+                        <template v-else>
+                            {{ player.name }}
+                        </template>
+                    </td>
+                    <td>
+                        <template v-if="editingPlayerId === player.id">
+                            <select v-model="editedPlayer.position" required>
+                                <option value="forward">Forward</option>
+                                <option value="midfielder">Midfielder</option>
+                                <option value="defender">Defender</option>
+                            </select>
+                        </template>
+                        <template v-else>
+                            {{ player.position }}
+                        </template>
+                    </td>
+                    <td>
+                        <template v-if="editingPlayerId === player.id">
+                            <input v-model="editedPlayer.number" type="text" required />
+                        </template>
+                        <template v-else>
+                            {{ player.number }}
+                        </template>
+                    </td>
+                    <td>
+                        <template v-if="editingPlayerId === player.id">
+                            <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
+                        </template>
+                        <template v-else>
+                            <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
+                        </template>
                         <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
                     </td>
                 </tr>
@@ -40,6 +70,14 @@ export default {
         return {
             players: [],
             loading: true,
+            editingPlayerId: null,
+            editedPlayer: {
+                name: '',
+                position: '',
+                number: '',
+            },
+            editedPlayerErrors: {},
+
         };
     },
     mounted() {
@@ -54,13 +92,31 @@ export default {
                 this.loading = false;
             }
         },
-        async editPlayer(player) {
-            // Implement your logic for editing a player
-            console.log('Editing player:', player);
+
+        editPlayer(player) {
+            this.editingPlayerId = player.id;
+            this.editedPlayer = { ...player };
+        },
+        async savePlayer(playerId) {
+            try {
+                await store.updatePlayer(playerId, this.editedPlayer);
+                await this.fetchPlayers(store);
+                this.cancelEdit();
+            } catch (error) {
+                if (error.errors) {
+                    this.editedPlayerErrors = Object.values(error.errors).flat();
+                    window.confirm(this.editedPlayerErrors)
+                } else {
+                    console.error('Error saving player:', error);
+                }
+            }
+        },
+
+        cancelEdit() {
+            this.editingPlayerId = null;
+            this.editedPlayer = { name: '', position: '', number: '' };
         },
         async deletePlayer(playerId) {
-            const store = useProductStore();
-
             const confirmed = window.confirm('Are you sure you want to delete this player?');
 
             if (confirmed) {
@@ -72,7 +128,6 @@ export default {
                 }
             }
         },
-
     },
 };
 </script>
