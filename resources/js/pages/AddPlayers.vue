@@ -7,17 +7,21 @@
             <input v-model="playerName" type="text" id="playerName" required />
             <button type="submit">Add Player</button>
         </form>
+
+        <hr />
+
+        <h2>All Players</h2>
+        <PlayersTable :players="players" />
+
     </div>
 </template>
 
 <script>
-import { PlayerStore } from '../stores/PlayersStore';
+import PlayersTable from '../components/PlayersTable.vue';
 
 export default {
-    setup() {
-        return {
-
-        };
-    },
+  components: {
+    PlayersTable,
+  },
 };
 </script>
