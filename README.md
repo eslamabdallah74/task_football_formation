@@ -4,6 +4,46 @@
 
 Thank you for exploring our Football Lineup Visualization App! I appreciate your interest and hope you find the application fun.
 
+## Installation
+
+1. **Database Setup:**
+
+    - Create a new database in your preferred database management system.
+    - Copy the `.env.example` file to `.env` and update the database configuration in the `.env` file with your database credentials.
+
+2. **Install Dependencies:**
+
+    - Run the following commands to install PHP and JavaScript dependencies:
+
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. **Database Migration and Seeding:**
+
+    - Run the following command to migrate and seed the database:
+
+    ```bash
+    php artisan migrate --seed
+    ```
+
+4. **Run the Application:**
+
+    - Start the Laravel development server:
+
+    ```bash
+    php artisan serve
+    ```
+
+    - Compile and watch for changes in JavaScript and CSS:
+
+    ```bash
+    npm run dev
+    ```
+
+    - Visit `http://localhost:8000` in your web browser.
+
 ## Important Points
 
 In the development of this application, I would like to highlight a few points:
