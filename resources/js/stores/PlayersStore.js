@@ -83,5 +83,4 @@ export const usePlayersStore = defineStore("ProductStore", {
         },
     },
 
-    // getters
 });
