@@ -4,29 +4,33 @@
             <div v-if="goalkeeper" class="col-12">
                 <!-- Goalkeeper -->
                 <div class="player-box col-12 my-4 goalkeeper">
-                    <span class="player-number">{{ goalkeeper.number }}</span>
                     <span class="player-name">{{ goalkeeper.name }}</span>
+                    <span class="player-number">{{ goalkeeper.number }}</span>
+
                 </div>
             </div>
             <!-- Defenders -->
             <div v-for="player in defenders" :key="player.id" :class="getColClass(defenders.length)">
                 <div class="player-box defenders my-5">
+                    <span class="player-name">{{ getName(player.name) }}</span>
                     <span class="player-number">{{ player.number }}</span>
-                    <span class="player-name">{{ player.name }}</span>
+
                 </div>
             </div>
             <!-- Midfielders -->
             <div v-for="player in midfielders" :key="player.id" :class="getColClass(midfielders.length)">
                 <div class="player-box midfielders my-5">
+                    <span class="player-name">{{ getName(player.name) }}</span>
                     <span class="player-number">{{ player.number }}</span>
-                    <span class="player-name">{{ player.name }}</span>
+
                 </div>
             </div>
             <!-- forward -->
             <div v-for="player in forward" :key="player.id" :class="getColClass(forward.length)">
                 <div class="player-box forward my-5">
+                    <span class="player-name">{{ getName(player.name) }}</span>
                     <span class="player-number">{{ player.number }}</span>
-                    <span class="player-name">{{ player.name }}</span>
+
                 </div>
             </div>
 
@@ -68,6 +72,10 @@ export default {
             if (playerCount === 5) return `col-md-2`;
             return `col-md-${playerCount <= columnSizes.length ? columnSizes[playerCount - 1] : defaultSize}`;
         },
+        getName(fullName) {
+            const parts = fullName.split(' ');
+            return parts.length > 0 ? parts[1] : fullName;
+        },
     },
 };
 </script>
@@ -95,7 +103,6 @@ export default {
     border-radius: 4px;
     color: white;
     height: 70px;
-    overflow: hidden;
 }
 
 .goalkeeper {
@@ -120,5 +127,11 @@ export default {
     width: 100%;
     background-color: #FFC0CB;
     /* Light Red */
+}
+
+.player-number {
+    border: 1px solid black;
+    padding: 4px;
+    border-radius: 4px;
 }
 </style>
