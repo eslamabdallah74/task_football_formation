@@ -101,7 +101,7 @@ export default {
         async savePlayer(playerId) {
             try {
                 await store.updatePlayer(playerId, this.editedPlayer);
-                await this.fetchPlayers(store);
+                store.fetchPlayers()
                 this.cancelEdit();
             } catch (error) {
                 if (error.errors) {
@@ -123,7 +123,7 @@ export default {
             if (confirmed) {
                 try {
                     await store.deletePlayer(playerId);
-                    await this.fetchPlayers(store);
+                    store.fetchPlayers()
                 } catch (error) {
                     console.error('Error deleting player:', error);
                 }
