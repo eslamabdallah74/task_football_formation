@@ -76,6 +76,7 @@ export const usePlayersStore = defineStore("ProductStore", {
                 const response = await fetch('/api/players');
                 const data = await response.json();
                 this.players = data.players;
+                console.log('fetch is working');
             } catch (error) {
                 console.error('Error fetching players:', error);
             }

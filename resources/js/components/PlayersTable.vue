@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div v-if="loading" class="loader">Loading...</div>
-        <table v-if="players.length > 0" class="table">
+        <table v-if="store.players.length > 0" class="table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(player, key) in players" :key="player.id">
+                <tr v-for="(player, key) in store.players" :key="player.id">
                     <td>{{ key + 1 }}</td>
                     <td>
                         <template v-if="editingPlayerId === player.id">
@@ -43,15 +43,15 @@
                         </template>
                     </td>
                     <template v-if="!home">
-                    <td>
-                        <template v-if="editingPlayerId === player.id">
-                            <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
-                        </template>
-                        <template v-else>
-                            <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
-                        </template>
-                        <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
-                    </td>
+                        <td>
+                            <template v-if="editingPlayerId === player.id">
+                                <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
+                            </template>
+                            <template v-else>
+                                <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
+                            </template>
+                            <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
                     </template>
 
                 </tr>
@@ -86,22 +86,14 @@ export default {
                 number: '',
             },
             editedPlayerErrors: {},
-
+            store
         };
     },
     mounted() {
-        this.fetchPlayers(store);
+        store.fetchPlayers()
+        this.loading = false;
     },
     methods: {
-        async fetchPlayers(store) {
-            try {
-                await store.fetchPlayers();
-                this.players = store.players;
-            } finally {
-                this.loading = false;
-            }
-        },
-
         editPlayer(player) {
             this.editingPlayerId = player.id;
             this.editedPlayer = { ...player };

@@ -12,7 +12,7 @@ class PlayerController extends Controller
 {
     public function index()
     {
-        $players = DB::table('players')->orderBy('position', 'desc')->get();
+        $players = DB::table('players')->orderBy('id', 'desc')->get();
         return response()->json(['players' => $players]);
     }
 
