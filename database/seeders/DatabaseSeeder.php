@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $player = Player::factory(60)->create();
+        $player = Player::factory(10)->create();
         $this->call(LineUpSeeder::class);
     }
 }

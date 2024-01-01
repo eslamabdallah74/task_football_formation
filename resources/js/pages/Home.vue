@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="col-md-6 md-3">
-                    <div class="mb-4">
+                    <div class="m-2">
                         <LinupSelector />
                     </div>
 
@@ -61,8 +61,7 @@ export default {
             const attackers = store.players.filter(player => player.position === 'forward');
 
             if (defenders.length < defendersCount || midfielders.length < midfieldersCount || attackers.length < attackersCount) {
-                console.error("Current players can't fit this formation");
-                // Handle the error as needed, for now, you can set filteredPlayers to an empty array
+                alert("Current players can't fit this formation, Please add more players to the");
                 this.filteredPlayers = [];
                 return;
             }
