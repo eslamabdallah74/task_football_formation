@@ -33,8 +33,8 @@
         </div>
     </div>
 </template>
-  
-  
+
+
 <script>
 export default {
     props: {
@@ -94,6 +94,8 @@ export default {
     place-items: center;
     border-radius: 4px;
     color: white;
+    height: 70px;
+    overflow: hidden;
 }
 
 .goalkeeper {
@@ -120,4 +122,3 @@ export default {
     /* Light Red */
 }
 </style>
-  
