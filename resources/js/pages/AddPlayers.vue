@@ -36,7 +36,9 @@
         <hr />
 
         <h2 class="text-center">All Players</h2>
-        <PlayersTable :players="players" />
+        <div class="container-fluid">
+            <PlayersTable  />
+        </div>
     </div>
 </template>
 

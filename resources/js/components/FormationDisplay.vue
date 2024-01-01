@@ -74,7 +74,7 @@ export default {
         },
         getName(fullName) {
             const parts = fullName.split(' ');
-            return parts.length > 0 ? parts[1] : fullName;
+            return parts.length > 0 ? parts[0] : fullName;
         },
     },
 };
