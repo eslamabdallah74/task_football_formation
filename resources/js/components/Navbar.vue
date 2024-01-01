@@ -16,9 +16,6 @@
                     <li class="nav-item">
                         <router-link to="/players/add" class="nav-link">Add Players</router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/line-up/add" class="nav-link">Add Line-ups</router-link>
-                    </li>
                 </ul>
             </div>
         </div>

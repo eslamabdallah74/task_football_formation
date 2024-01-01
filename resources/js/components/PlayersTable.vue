@@ -43,15 +43,15 @@
                         </template>
                     </td>
                     <template v-if="!home">
-                        <td>
-                            <template v-if="editingPlayerId === player.id">
-                                <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
-                            </template>
-                            <template v-else>
-                                <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
-                            </template>
-                            <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
-                        </td>
+                    <td>
+                        <template v-if="editingPlayerId === player.id">
+                            <button @click="savePlayer(player.id)" class="btn btn-success btn-sm">Save</button>
+                        </template>
+                        <template v-else>
+                            <button @click="editPlayer(player)" class="btn btn-primary btn-sm">Edit</button>
+                        </template>
+                        <button @click="deletePlayer(player.id)" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
                     </template>
 
                 </tr>
@@ -64,9 +64,9 @@
 </template>
 
 <script>
-import { useProductStore } from '../stores/PlayersStore';
+import { usePlayersStore } from '../stores/PlayersStore';
 
-const store = useProductStore();
+const store = usePlayersStore();
 
 export default {
     props: {

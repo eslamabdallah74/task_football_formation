@@ -1,8 +1,13 @@
 import { defineStore } from "pinia";
-export const useProductStore = defineStore("ProductStore", {
+export const usePlayersStore = defineStore("ProductStore", {
     state: () => {
         return {
             players: [],
+        }
+    },
+    getters: {
+        getPlayers(state) {
+            return state.players
         }
     },
     actions: {
@@ -18,6 +23,7 @@ export const useProductStore = defineStore("ProductStore", {
                 });
 
                 if (!response.ok) {
+                    const errorData = await response.json();
                     return Promise.reject(errorData);
                 }
 

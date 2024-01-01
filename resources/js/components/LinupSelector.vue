@@ -1,11 +1,10 @@
 <template>
     <div class="linup-selector">
         <label for="lineupselect">Select Linup:</label>
-        <select id="lineupselect" v-model="selectedLinup" @change="onLinupChange">
+        <select id="lineupselect" v-model="selectedLineup" @change="onLineupChange">
             <option disabled value="">Please select linup</option>\
-            <option v-for="linup in lineups" :key="linup.id" :value="linup.id">{{ linup.plan }}</option>
+            <option v-for="linup in lineups" :key="linup.id" :value="linup.plan">{{ linup.plan }}</option>
         </select>
-
     </div>
 </template>
   
@@ -17,10 +16,11 @@ const plans = useLineUpStore();
 export default {
     data() {
         return {
-            selectedLinup: '',
+            selectedLineup: '',
             lineups: []
         };
     },
+
     mounted() {
         this.fetchPlans(plans);
     },
@@ -29,14 +29,16 @@ export default {
             try {
                 await plans.fetchLineUps();
                 this.lineups = plans.lineups;
-                console.log(this.lineups);
 
             } finally {
                 this.loading = false;
             }
         },
-    },
-
+        onLineupChange() {
+            const store = useLineUpStore();
+            store.setSelectedLineup(this.selectedLineup);
+        },
+    }
 };
 </script>
   

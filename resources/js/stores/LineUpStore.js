@@ -3,6 +3,7 @@ export const useLineUpStore = defineStore("LineUpStore", {
     state: () => {
         return {
             lineups: [],
+            selectedLineup: '',
         }
 
     },
@@ -15,6 +16,9 @@ export const useLineUpStore = defineStore("LineUpStore", {
             } catch (error) {
                 console.error('Error fetching lineups:', error);
             }
+        },
+        setSelectedLineup(selectedLineup) {
+            this.selectedLineup = selectedLineup;
         },
     },
 

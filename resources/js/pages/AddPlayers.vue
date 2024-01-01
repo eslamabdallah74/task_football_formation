@@ -42,7 +42,7 @@
 
 <script>
 import PlayersTable from '../components/PlayersTable.vue';
-import { useProductStore } from '../stores/PlayersStore';
+import { usePlayersStore } from '../stores/PlayersStore';
 
 export default {
     components: {
@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         async addPlayer() {
-            const store = useProductStore();
+            const store = usePlayersStore();
             const playerData = {
                 name: this.playerName,
                 position: this.playerPosition,
@@ -71,6 +71,7 @@ export default {
                 this.playerPosition = '';
                 this.playerNumber = '';
                 this.validationErrors = [];
+
             } catch (error) {
                 if (error.errors) {
                     this.validationErrors = Object.values(error.errors).flat();
