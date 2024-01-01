@@ -67,9 +67,8 @@ export default {
     methods: {
         getColClass(playerCount) {
             // Dynamically calculate the column class based on the number of players
-            const columnSizes = [12, 6, 4, 3];
+            const columnSizes = [12, 6, 4, 3, 2];
             const defaultSize = 3; // Default to col-md-3 if more than 4 players
-            if (playerCount === 5) return `col-md-2`;
             return `col-md-${playerCount <= columnSizes.length ? columnSizes[playerCount - 1] : defaultSize}`;
         },
         getName(fullName) {

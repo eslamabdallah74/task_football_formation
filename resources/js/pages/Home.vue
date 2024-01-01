@@ -13,7 +13,7 @@
                         <LinupSelector />
                     </div>
 
-                    <PlayersTable :home="true" :filteredPlayers="filteredPlayers" />
+                    <PlayersTable :home="true" />
 
                 </div>
 
@@ -21,7 +21,7 @@
         </div>
     </div>
 </template>
-    
+
 <script>
 import LinupSelector from '../components/LinupSelector.vue';
 import PlayersTable from '../components/PlayersTable.vue';
@@ -47,7 +47,6 @@ export default {
     },
     watch: {
         selectedLineup(newSelectedLineup, oldSelectedLineup) {
-            console.log('Selected lineup changed:', newSelectedLineup);
             this.filterPlayers(newSelectedLineup);
         },
     },
@@ -71,13 +70,12 @@ export default {
             const filteredAttackers = attackers.slice(0, attackersCount);
 
             this.filteredPlayers = [...filteredDefenders, ...filteredMidfielders, ...filteredAttackers];
-            console.log('Filtered Players:', JSON.parse(JSON.stringify(this.filteredPlayers)));
         },
 
     },
 };
 </script>
-  
+
 <style>
 .field {
     position: absolute;
